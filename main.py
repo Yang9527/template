@@ -4,13 +4,12 @@ import os
 import sys
 import logging
 import datetime
-import subprocess
-import inspect
 from os.path import join
 
 #------------set up environment-------------------------------------
 CUR_DIR, CUR_SCRIPT = os.path.split(os.path.abspath(sys.argv[0]))
-HOME_LOCAL = os.path.split(CUR_DIR)[0]
+#HOME_LOCAL = os.path.split(CUR_DIR)[0]
+HOME_LOCAL = CUR_DIR
 HOME_SRC = join(HOME_LOCAL, "src")
 HOME_LIB = join(HOME_LOCAL, "lib")
 HOME_DATA = join(HOME_LOCAL, "data")
@@ -30,9 +29,11 @@ config = ConfigParser.ConfigParser()
 config.read(join(HOME_CONF, "conf.ini"))
 config = ConfigUtil(config)
 parser = argparse.ArgumentParser()
-parser.add_argument("--job", dest="job", help="name of the function be evaluated.")
+parser.add_argument("--job", dest="job", default="run", help="name of the function be evaluated.")
 params = parser.parse_args()
 
+def run():
+    print("hello word!")
 if __name__ == "__main__":
     eval(params.job)()
 
